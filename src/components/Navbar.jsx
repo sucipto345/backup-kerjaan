@@ -55,18 +55,18 @@ const Navbar = () => {
   >
     HOME
   </Link>
-  <Link 
-    to="/about" 
+  <a 
+    href="#about" 
     className="bg-white text-gray-600 px-4 py-2 rounded hover:bg-purple-700 hover:text-white transition-colors"
   >
     ABOUT
-  </Link>
-  <Link 
-    to="/contact" 
+  </a>
+  <a 
+    href="#contact" 
     className="bg-white text-gray-600 px-4 py-2 rounded hover:bg-purple-700 hover:text-white transition-colors"
   >
     CONTACT US
-  </Link>
+  </a>
 </nav>
         </nav>
       </div>
