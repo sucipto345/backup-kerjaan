@@ -1,9 +1,15 @@
 // src/components/Navbar.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logoCompany from '../assets/images/logo-company.png'
+import logoCompany from '../assets/images/logo-company.png';
 
-const Navbar = () => {
+const Navbar = ({scrollToSection}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleNavbar = ({scrollToSection}) => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header className="bg-transparent shadow-sm">
       <div className="max-w-6xl mx-auto">
@@ -28,7 +34,7 @@ const Navbar = () => {
                   className="w-full px-4 py-2 pl-10 pr-4 rounded-lg bg-white border-none focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
                 />
                 <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                  {/* Search Icon - ganti dengan icon Anda */}
+                  {/* Search Icon */}
                   <svg 
                     className="w-4 h-4 text-gray-400"
                     fill="none"
@@ -47,28 +53,64 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right Section: Navigation */}
-          <nav className="flex items-center space-x-6 ml-8">
-  <Link 
-    to="/" 
-    className="bg-transparent text-white px-4 py-2 rounded hover:bg-slate-800 hover:text-white transition-colors"
-  >
-    HOME
-  </Link>
-  <a 
-    href="#about" 
-    className=" text-white px-4 py-2 rounded hover:bg-slate-800 hover:text-white transition-colors"
-  >
-    ABOUT
-  </a>
-  <a 
-    href="#contact" 
-    className=" text-white px-4 py-2 rounded hover:bg-slate-800 hover:text-white transition-colors"
-  >
-    CONTACT US
-  </a>
-</nav>
+          {/* Right Section: Navigation for Desktop */}
+          <div className="hidden sm:flex space-x-6">
+            <Link 
+              to="/" 
+              className="bg-transparent text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+            >
+              HOME
+            </Link>
+            <button 
+              onClick={() => scrollToSection('about')} 
+              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+            >
+              ABOUT
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}  
+              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+            >
+              CONTACT US
+            </button>
+          </div>
+
+                    {/* Hamburger Button for Mobile */}
+                    <button
+            className="sm:hidden p-2 text-white"
+            onClick={toggleNavbar}
+          >
+            {isOpen ? '✖' : '☰'}
+          </button>
         </nav>
+
+        {/* Sidebar Navbar for Mobile */}
+        <div
+          className={`fixed top-0 right-0 h-full bg-slate-800 text-white transition-transform transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          style={{ width: '250px' }} // Sidebar width
+        >
+          <nav className="flex flex-col items-start p-4 space-y-4">
+            <Link
+              to="/"
+              className="bg-transparent text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+              onClick={toggleNavbar} // Close navbar when link is clicked
+            >
+              HOME
+            </Link>
+            <button 
+              onClick={() => scrollToSection('about')} 
+              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+            >
+              ABOUT
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}  
+              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+            >
+              CONTACT US
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
   );

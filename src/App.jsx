@@ -4,6 +4,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Design from './pages/Design';
+import Website from './pages/Webiste';
+import Feeds from './pages/feeds';
+import Animations from './pages/Animation';
+
+const scrollToSection = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 const socialMedia = [
   {
@@ -47,17 +57,22 @@ function App() {
   const prevMedia = socialMedia[(activeIndex - 1 + socialMedia.length) % socialMedia.length];
   const nextMedia = socialMedia[(activeIndex + 1) % socialMedia.length];
 
+
+
   return (
     <Router>
-      <Layout>
+      <Layout scrollToSection={scrollToSection}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/design" element={<Design />} />
+          <Route path="/website" element={<Website />} />
+          <Route path="/feeds" element={<Feeds />} />
+          <Route path="/animation" element={<Animation />} />
         </Routes>
         {/* Content Section with Dark Background */}
         <div className="bg-white relative -mt-24 pt-32 pb-20">
           <div className="max-w-6xl mx-auto px-4">
-            <p className='text-6xl text-center text-black mb-10' id='About'>About US</p>
+            <p className='text-6xl text-center text-black mb-10' id='about'>About US</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-black">
               {/* Content Column 1 */}
               <div>
@@ -82,7 +97,7 @@ function App() {
 
           {/* Contact Card Section */}
           <div className="flex-row items-center justify-center bg-white text-white py-4 ">
-            <p className='text-black text-center text-6xl mb-24 mt-12'>Contact US</p>
+            <p className='text-black text-center text-6xl mb-24 mt-12'id='contact'>Contact US</p>
             <div className="flex items-center space-x-4">
               
               {/* Kartu Sosial Media Sebelumnya (Kiri) */}

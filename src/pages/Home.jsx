@@ -34,7 +34,12 @@ const Home = () => {
   const [activeId, setActiveId] = useState(null);
 
   return (
+      
     <div className="relative">
+        <div className='flex flex-col justify-center items-center'>
+          <p className='mt-36 text-white text-4xl font-light fadeIn'>Welcome to</p>
+          <p className='text-white text-5xl font-bold fadeIn pt-4'>InStayCreative</p>
+        </div>
       {/* Services Navigation */}
       <div className="max-w-6xl mx-auto px-4 relative z-10 mt-40">
         <div className="bg-white rounded-lg shadow-lg p-8 mt-12">
