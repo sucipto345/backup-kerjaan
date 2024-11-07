@@ -55,14 +55,14 @@ function App() {
           <Route path="/design" element={<Design />} />
         </Routes>
         {/* Content Section with Dark Background */}
-        <div className="bg-slate-800 relative -mt-24 pt-32 pb-20">
+        <div className="bg-white relative -mt-24 pt-32 pb-20">
           <div className="max-w-6xl mx-auto px-4">
-            <p className='text-6xl text-center text-white mb-10' id='About'>About US</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
+            <p className='text-6xl text-center text-black mb-10' id='About'>About US</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-black">
               {/* Content Column 1 */}
               <div>
                 <h2 className="text-3xl font-bold mb-4">Welcome to Our Services</h2>
-                <p className="text-gray-300">
+                <p className="text-black">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                   Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
@@ -70,7 +70,7 @@ function App() {
               {/* Content Column 2 */}
               <div>
                 <h3 className="text-2xl font-bold mb-4">Why Choose Us</h3>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-black">
                   <li>✓ Professional Design Services</li>
                   <li>✓ Custom Website Development</li>
                   <li>✓ Creative Animation Solutions</li>
@@ -81,8 +81,8 @@ function App() {
           </div>
 
           {/* Contact Card Section */}
-          <div className="flex-row items-center justify-center bg-slate-800 text-white py-4 ">
-            <p className='text-white text-center text-6xl mb-24 mt-12'>Contact US</p>
+          <div className="flex-row items-center justify-center bg-white text-white py-4 ">
+            <p className='text-black text-center text-6xl mb-24 mt-12'>Contact US</p>
             <div className="flex items-center space-x-4">
               
               {/* Kartu Sosial Media Sebelumnya (Kiri) */}
