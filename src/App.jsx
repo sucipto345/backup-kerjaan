@@ -5,8 +5,8 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Design from './pages/Design';
 import Website from './pages/Webiste';
-import Feeds from './pages/feeds';
-import Animations from './pages/Animation';
+import Feeds from './pages/Feeds';
+import Animation from './pages/Animation'
 
 const scrollToSection = (id) => {
   const element = document.getElementById(id);
