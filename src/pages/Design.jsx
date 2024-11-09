@@ -85,25 +85,25 @@ const Design = () => {
       {selectedImage && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 backdrop-blur-sm">
           {isZoomed ? (
-            <div className="relative max-w-3/4 max-h-3/4 flex justify-center items-center">
-              <button className="absolute top-2 right-2 text-white" onClick={closeModal}>✕</button>
+            <div className="relative flex justify-center items-center">
+              <button className="absolute top-4 right-4 text-white text-xl" onClick={closeModal}>✕</button>
               <img 
                 src={selectedImage.src} 
                 alt="Fullscreen" 
-                className="w-3/4 h-3/4 object-contain rounded-lg"
+                className={`rounded-lg object-contain ${selectedImage.src.includes('portrait') ? 'max-h-[75vh]' : 'w-3/4 h-3/4'} `}
               />
             </div>
           ) : (
             <div className="bg-gray-800 p-4 rounded-lg max-w-3xl w-full grid grid-cols-2 gap-4 mx-4 relative">
               {/* Close button */}
-              <button className="absolute top-2 right-2 text-white" onClick={closeModal}>✕</button>
+              <button className="absolute top-4 right-4 text-white text-xl" onClick={closeModal}>✕</button>
               
               {/* Image on the left */}
               <div className="relative flex justify-center items-center">
                 <img 
                   src={selectedImage.src} 
                   alt="Fullscreen" 
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-lg max-h-[70vh]"
                 />
                 {/* Zoom Button */}
                 <button 
