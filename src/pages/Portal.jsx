@@ -43,7 +43,7 @@ const Portal = () => {
               />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-black mb-2">InStayCreative</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">InStayCreative</h1>
         </div>
 
         {/* Services Grid - 2x2 Layout */}
