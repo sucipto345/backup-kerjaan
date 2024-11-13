@@ -1,16 +1,17 @@
 // src/components/Layout.jsx
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const Layout = ({ children, scrollToSection }) => {
+const Layout = ({ scrollToSection }) => {
   return (
     <div className="min-h-screen bg-slate-700">
-      <Navbar scrollToSection={scrollToSection}/>
+      <Navbar scrollToSection={scrollToSection} />
       <main>
-        {children}
+        <Outlet /> {/* Tempat komponen halaman dirender */}
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
