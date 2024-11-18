@@ -1,53 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
+import Sonic from '../assets/animasi/sonic-chicken[motion_logo].gif'
 
+// Contoh data animasi
 const animate = [
   {
-    type: 'video',
-    src: '/animasi/sonic-chicken-motion-logo.mp4', // Path sesuai struktur folder Anda
+    type: 'gif',
+    src: Sonic, // Sesuaikan path GIF Anda
     hashtag: '#VideoProject',
-    category: 'Video',
+    category: 'Motion Logo',
     worker: 'Worker V',
     client: 'Client M'
   },
-  // Tambahkan video lain di sini dengan format yang sama
+  // Tambahkan GIF lain di sini dengan format yang sama
 ];
 
 const Animation = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
-  const videoRefs = useRef([]);
-
-  const handleMouseEnter = (index) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.volume = 0; // Set volume to 0 for autoplay
-      video.play().catch(err => {
-        console.log('Autoplay failed:', err);
-        video.muted = true; // Fallback untuk autoplay
-        video.play();
-      });
-    }
-  };
-
-  const handleMouseLeave = (index) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.pause();
-      video.currentTime = 0; // Reset video ke awal
-    }
-  };
 
   const openModal = (item) => {
     setSelectedItem(item);
-    // Pause semua video saat modal dibuka
-    videoRefs.current.forEach(video => {
-      if (video) {
-        video.pause();
-        video.currentTime = 0;
-      }
-    });
   };
 
   const closeModal = () => {
@@ -78,18 +52,14 @@ const Animation = () => {
               key={index}
               className="mb-4 cursor-pointer relative group"
               onClick={() => openModal(item)}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
             >
-              <video
-                ref={el => videoRefs.current[index] = el}
+              <img
                 src={item.src}
-                className="w-full h-auto rounded-lg"
-                muted
-                playsInline
-                loop
-                preload="metadata"
+                alt={item.hashtag}
+                className="w-full h-auto rounded-lg hover:opacity-90 transition-opacity"
+                loading="lazy"
               />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity rounded-lg" />
             </div>
           ))}
         </Masonry>
@@ -106,27 +76,21 @@ const Animation = () => {
               >
                 ✕
               </button>
-              <video
+              <img
                 src={selectedItem.src}
-                className="max-h-screen w-auto"
-                controls
-                autoPlay
-                muted
-                playsInline
+                alt={selectedItem.hashtag}
+                className="max-h-screen w-auto object-contain"
               />
             </div>
           ) : (
             <div className="bg-gray-800 rounded-lg max-w-5xl w-full mx-4 relative">
               <div className="grid grid-cols-2 gap-4">
-                {/* Video Section */}
-                <div className ="relative p-4">
-                  <video
+                {/* Image Section */}
+                <div className="relative p-4">
+                  <img
                     src={selectedItem.src}
+                    alt={selectedItem.hashtag}
                     className="w-full h-auto rounded-lg"
-                    controls
-                    autoPlay
-                    muted
-                    playsInline
                   />
                   <button
                     onClick={toggleZoom}
