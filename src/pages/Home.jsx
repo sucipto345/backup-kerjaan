@@ -4,8 +4,9 @@ import designIcon from "../assets/icons/art.png";
 import websiteIcon from "../assets/icons/coding.png";
 import animationIcon from "../assets/icons/animate.png";
 import feedsIcon from "../assets/icons/story.png";
-import slider1 from "../assets/Slider/slider3.jpg";
-import slider2 from "../assets/Slider/slider4.jpg";
+// import slider1 from "../assets/Slider/slider3.jpg";
+// import slider2 from "../assets/Slider/slider4.jpg";
+import CommingSoon from "../assets/Slider/coming-soon.png";
 import ContactUs from "../assets/icons/messenger.png";
 import "./css/SliderAnimation.css";
 
@@ -16,12 +17,12 @@ const Home = () => {
 
   const Slider = [
     {
-      url: "https://wa.me/your-number",
-      src: slider1,
+      url: "#",
+      src: CommingSoon,
     },
     {
-      url: "https://t.me/your-username",
-      src: slider2,
+      url: "#",
+      src: CommingSoon,
     },
   ];
 
