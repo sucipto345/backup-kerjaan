@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import designIcon from "../assets/icons/art.png";
 import websiteIcon from "../assets/icons/coding.png";
 import animationIcon from "../assets/icons/animate.png";
 import feedsIcon from "../assets/icons/story.png";
-// import slider1 from "../assets/Slider/slider3.jpg";
-// import slider2 from "../assets/Slider/slider4.jpg";
 import CommingSoon from "../assets/Slider/coming-soon.png";
 import ContactUs from "../assets/icons/messenger.png";
 import "./css/SliderAnimation.css";
@@ -19,10 +17,12 @@ const Home = () => {
     {
       url: "#",
       src: CommingSoon,
+      name: "Coming Soon 1",
     },
     {
       url: "#",
       src: CommingSoon,
+      name: "Coming Soon 2",
     },
   ];
 
@@ -45,6 +45,15 @@ const Home = () => {
       setIsAnimating(false);
     }, 300);
   };
+
+  // Automatic slider functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 10000); // Change slide every 10 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
   const activeMedia = Slider[activeIndex];
 
@@ -79,22 +88,23 @@ const Home = () => {
     {
       id: 1,
       title: "COMMING SOON 1",
-      imgSrc: "path_to_image_1.jpg", // Ganti dengan path gambar yang sesuai
-      link: "/content/1", // Ganti dengan path yang sesuai
+      src: "path_to_image_1.jpg", // Replace with actual image path
+      link: "/content/1",
     },
     {
       id: 2,
       title: "COMMING SOON 2",
-      imgSrc: "path_to_image_2.jpg",
+      src: "path_to_image_2.jpg", // Replace with actual image path
       link: "/content/2",
     },
     {
       id: 3,
       title: "COMMING SOON 3",
-      imgSrc: "path_to_image_3.jpg",
+      src: "path_to_image_3.jpg", // Replace with actual image path
       link: "/content/3",
     },
   ];
+
   return (
     <div className="relative z-0">
       <div className="flex flex-col justify-center items-center w-full">
@@ -108,12 +118,13 @@ const Home = () => {
           <button
             onClick={handlePrev}
             disabled={isAnimating}
+            aria-label="Previous Slide"
             className="absolute left-4 w-14 h-14 flex items-center justify-center bg-white bg-opacity-50 rounded-full hover:bg-slate-700 transition-all duration-300 transform hover:scale-105 focus:outline-none"
           >
             <span className="text-gray-800 text-3xl">&lt;</span>
           </button>
 
-          {/* Active Card (gambar) */}
+          {/* Active Card (image) */}
           <div className="relative w-2/3 md:w-1/2 flex justify-center mx-auto">
             <div
               className={`transform transition-all duration-300 ease-in-out ${slideDirection}`}
@@ -122,9 +133,8 @@ const Home = () => {
                 href={activeMedia.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex flex-col justify-center items-center w-full rounded-lg text-center transition-all duration-300 hover:scale-105 ${activeMedia.color}`}
+                className="flex flex-col justify-center items-center w-full rounded-lg text-center transition-all duration-300 hover:scale-105"
               >
-                {/* Menambahkan elemen img untuk menampilkan gambar */}
                 <img
                   src={activeMedia.src}
                   alt={activeMedia.name}
@@ -141,6 +151,7 @@ const Home = () => {
           <button
             onClick={handleNext}
             disabled={isAnimating}
+            aria-label="Next Slide"
             className="absolute right-4 w-14 h-14 flex items-center justify-center bg-white bg-opacity-50 rounded-full hover:bg-slate-700 transition-all duration-300 transform hover:scale-105 focus:outline-none"
           >
             <span className="text-gray-800 text-3xl">&gt;</span>
@@ -221,7 +232,7 @@ const Home = () => {
               >
                 <Link to={preview.link}>
                   <img
-                    src={preview.imgSrc}
+                    src={preview.src}
                     alt={preview.title}
                     className="w-full h-40 object-cover"
                   />
@@ -235,12 +246,13 @@ const Home = () => {
           <div className="mt-6 text-center">
             <Link to="/content">
               <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
-                Tampilkan Selengkapnya
+                Tampilkan Selengkapnya{" "}
               </button>
             </Link>
           </div>
         </div>
       </div>
+
       <div className="max-w-6xl mx-auto px-4 py-4">
         <p className="text-6xl text-center text-white mb-10" id="about">
           About Us
