@@ -26,24 +26,32 @@ const Home = () => {
     },
   ];
 
-  const handlePrev = () => {
-    if (isAnimating || Slider.length === 0) return;
-    setIsAnimating(true);
-    setSlideDirection("slide-right");
-    setTimeout(() => {
-      setActiveIndex((prev) => (prev === 0 ? Slider.length - 1 : prev - 1));
-      setIsAnimating(false);
-    }, 300);
-  };
+  const [animationClass, setAnimationClass] = useState("");
 
   const handleNext = () => {
     if (isAnimating || Slider.length === 0) return;
     setIsAnimating(true);
-    setSlideDirection("slide-left");
+    setAnimationClass("slide-left"); // Set the animation class
+
+    // Set a timeout to transition to the next slide
     setTimeout(() => {
       setActiveIndex((prev) => (prev === Slider.length - 1 ? 0 : prev + 1));
       setIsAnimating(false);
-    }, 300);
+      setAnimationClass(""); // Reset animation class after transition
+    }, 300); // Match this with your animation duration
+  };
+
+  const handlePrev = () => {
+    if (isAnimating || Slider.length === 0) return;
+    setIsAnimating(true);
+    setAnimationClass("slide-right"); // Set the animation class
+
+    // Set a timeout to transition to the previous slide
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev === 0 ? Slider.length - 1 : prev - 1));
+      setIsAnimating(false);
+      setAnimationClass(""); // Reset animation class after transition
+    }, 300); // Match this with your animation duration
   };
 
   // Automatic slider functionality
@@ -51,6 +59,15 @@ const Home = () => {
     const interval = setInterval(() => {
       handleNext();
     }, 10000); // Change slide every 10 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  // Automatic slider functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000); // Change slide every 10 seconds
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
@@ -113,49 +130,22 @@ const Home = () => {
         </p>
 
         {/* Slider */}
-        <div className="w-full max-w-7xl flex items-center justify-center relative px-8">
-          {/* Previous Button */}
-          <button
-            onClick={handlePrev}
-            disabled={isAnimating}
-            aria-label="Previous Slide"
-            className="absolute left-4 w-14 h-14 flex items-center justify-center bg-white bg-opacity-50 rounded-full hover:bg-slate-700 transition-all duration-300 transform hover:scale-105 focus:outline-none"
+        <div
+          className={`transform transition-all duration-300 ease-in-out ${animationClass}`}
+        >
+          <a
+            href={activeMedia.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col justify-center items-center w-full rounded-lg text-center transition-all duration-300 hover:scale-105"
           >
-            <span className="text-gray-800 text-3xl">&lt;</span>
-          </button>
-
-          {/* Active Card (image) */}
-          <div className="relative w-2/3 md:w-1/2 flex justify-center mx-auto">
-            <div
-              className={`transform transition-all duration-300 ease-in-out ${slideDirection}`}
-            >
-              <a
-                href={activeMedia.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col justify-center items-center w-full rounded-lg text-center transition-all duration-300 hover:scale-105"
-              >
-                <img
-                  src={activeMedia.src}
-                  alt={activeMedia.name}
-                  className="w-full h-full object-cover rounded-lg mb-4"
-                />
-                <div className="text-2xl font-bold mb-3">
-                  {activeMedia.name}
-                </div>
-              </a>
-            </div>
-          </div>
-
-          {/* Next Button */}
-          <button
-            onClick={handleNext}
-            disabled={isAnimating}
-            aria-label="Next Slide"
-            className="absolute right-4 w-14 h-14 flex items-center justify-center bg-white bg-opacity-50 rounded-full hover:bg-slate-700 transition-all duration-300 transform hover:scale-105 focus:outline-none"
-          >
-            <span className="text-gray-800 text-3xl">&gt;</span>
-          </button>
+            <img
+              src={activeMedia.src}
+              alt={activeMedia.name}
+              className="w-full h-full object-cover rounded-lg mb-4"
+            />
+            <div className="text-2xl font-bold mb-3">{activeMedia.name}</div>
+          </a>
         </div>
       </div>
 
