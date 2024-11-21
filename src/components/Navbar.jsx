@@ -1,134 +1,198 @@
-// src/components/Navbar.jsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import logoCompany from '../assets/images/logo-company.png';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import logoCompany from "../assets/images/logo-company.png";
 
-const Navbar = ({scrollToSection}) => {
+const Navbar = ({ scrollToSection }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleNavbar = ({scrollToSection}) => {
+  const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById("dropdown");
+      if (dropdown && !dropdown.contains(event.target)) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <header className="bg-transparent shadow-sm">
+    <header className="bg-transparent shadow-sm sticky top-0 z-50">
       <div className="max-w-6xl mx-auto">
-        <nav className="flex items-center justify-around p-4">
-          {/* Left Section: Logo and Search */}
+        <nav className="flex items-center justify-between">
+          {/* Left Section: Logo and Name */}
           <div className="flex items-center space-x-8 flex-1">
-            {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img 
+              <img
                 src={logoCompany}
-                alt="Company Logo" 
+                alt="Company Logo"
                 className="h-12 w-auto"
               />
             </Link>
-            {/* InsStayCreative*/}
-            <div className='flex-col flex '>
-              <p className='text-xl font-bold text-white'>InStay</p>
-              <p className='text-xl font-bold text-white'>Creative</p>
+            <div className="flex-col flex">
+              <p className="text-xl font-bold text-white">InStay</p>
+              <p className="text-xl font-bold text-white">Creative</p>
             </div>
-
-            {/* Search Bar */}
-            {/* <div className="max-w-md w-full">
-              <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                 className="sm:w-2/4 px-4 py-2 pl-10 pr-4 rounded-lg bg-white border-none focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
-                />
-                <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                  
-                  <svg 
-                    className="w-4 h-4 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div> */}
           </div>
 
           {/* Right Section: Navigation for Desktop */}
-          <div className="hidden sm:flex space-x-6">
-            <Link 
-              to="/" 
-              className="bg-transparent text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+          <div className="hidden sm:flex space-x-6 m-6 relative items-center">
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                aria-expanded={isDropdownOpen}
+                className="text-white px-4 py-2 hover:bg-slate-700 rounded bg-transparent"
+              >
+                TALENT
+              </button>
+              {isDropdownOpen && (
+                <div
+                  id="dropdown"
+                  className="absolute top-full left-0 mt-2 w-48 bg-slate-800 text-white rounded shadow-lg z-10"
+                >
+                  <Link
+                    to="/talent/designers"
+                    className="block px-4 py-2 hover:bg-slate-700 rounded-t"
+                    onClick={closeDropdown}
+                  >
+                    {/* Designers */}
+                    Comming Soon
+                  </Link>
+                  <Link
+                    to="/talent/developers"
+                    className="block px-4 py-2 hover:bg-slate-700"
+                    onClick={closeDropdown}
+                  >
+                    {/* Developers */}
+                    Comming Soon
+                  </Link>
+                  <Link
+                    to="/talent/managers"
+                    className="block px-4 py-2 hover:bg-slate-700 rounded-b"
+                    onClick={closeDropdown}
+                  >
+                    {/* Managers */}
+                    Comming Soon
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="#"
+              className="text-white px-4 py-2 hover:bg-slate-700 rounded transition-colors"
             >
-              HOME
+              UNDANGAN
             </Link>
-            <button 
-              onClick={() => scrollToSection('about')} 
-              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+
+            <button
+              onClick={() => scrollToSection("testimoni")}
+              className="text-white px-4 py-2 hover:bg-slate-700 rounded bg-transparent"
             >
-              ABOUT
+              TESTIMONI
             </button>
-            <button 
-              onClick={() => scrollToSection('contact')}  
-              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
+
+            <Link
+              to="#"
+              className="text-white px-4 py-2 hover:bg-slate-700 rounded transition-colors"
             >
-              CONTACT US
-            </button>
-            <Link 
-              to="/Login" 
-              className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
-            >
-              LOGIN 
+              E-BOOK
             </Link>
           </div>
 
-                    {/* Hamburger Button for Mobile */}
-          
+          {/* Hamburger Button for Mobile */}
           <button
-            className="sm:hidden p-2 text-white"
+            className="sm:hidden p-2 text-white z-50"
             onClick={toggleNavbar}
           >
-            {isOpen ? '✖' : '☰'}
+            {isOpen ? "✖" : "☰"}
           </button>
-        </nav>
 
-        {/* Sidebar Navbar for Mobile */}
-        <div
-          className={`fixed top-0 right-0 h-full bg-slate-800 text-white transition-transform transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-          style={{ width: '250px' }} // Sidebar width
-        >
-          <nav className="flex flex-col items-start p-4 space-y-4">
-          <Link 
-              to="/Login" 
-              className="bg-transparent text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
-            >
-              LOGIN 
-            </Link>
-            <Link
-              to="/"
-              className="bg-transparent text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
-              onClick={toggleNavbar} // Close navbar when link is clicked
-            >
-              HOME
-            </Link>
-            <button 
-              onClick={() => scrollToSection('about')} 
-              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
-            >
-              ABOUT
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}  
-              className="text-white px-4 py-2 rounded hover:bg-slate-700 transition-colors"
-            >
-              CONTACT US
-            </button>
-          </nav>
-        </div>
+          {/* Sidebar Navbar for Mobile */}
+          <div
+            className={`fixed top-0 right-0 h-full bg-slate-800 text-white transition-transform transform ${
+              isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+            style={{ width: "250px" }}
+          >
+            <nav className="flex flex-col items-start p-4 space-y-4">
+              <div className="relative">
+                <button
+                  onClick={toggleDropdown}
+                  aria-expanded={isDropdownOpen}
+                  className="text-white px-4 py-2 hover:bg-slate-700 rounded bg-transparent"
+                >
+                  TALENT
+                </button>
+                {isDropdownOpen && (
+                  <div
+                    id="dropdown"
+                    className="absolute top-full left-0 mt-2 w-48 bg-slate-800 text-white rounded shadow-lg z-10"
+                  >
+                    <Link
+                      to="/talent/designers"
+                      className="block px-4 py-2 hover:bg-slate-700 rounded-t"
+                      onClick={closeDropdown}
+                    >
+                      Designers
+                    </Link>
+                    <Link
+                      to="/talent/developers"
+                      className="block px-4 py-2 hover:bg-slate-700"
+                      onClick={closeDropdown}
+                    >
+                      Developers
+                    </Link>
+                    <Link
+                      to="/talent/managers"
+                      className="block px-4 py-2 hover:bg-slate-700 rounded-b"
+                      onClick={closeDropdown}
+                    >
+                      Managers
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                to="/undangan"
+                className="text-white px-4 py-2 hover:bg-slate-700 rounded transition-colors"
+              >
+                UNDANGAN
+              </Link>
+
+              <button
+                onClick={() => scrollToSection("testimoni")}
+                className="text-white px-4 py-2 hover:bg-slate-700 rounded bg-transparent"
+              >
+                TESTIMONI
+              </button>
+
+              <Link
+                to="/ebook"
+                className="text-white px-4 py-2 hover:bg-slate-700 rounded transition-colors"
+              >
+                E-BOOK
+              </Link>
+            </nav>
+          </div>
+        </nav>
       </div>
     </header>
   );

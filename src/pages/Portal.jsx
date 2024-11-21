@@ -14,10 +14,30 @@ const Portal = () => {
   const [showRules, setShowRules] = useState(false);
 
   const services = [
-    { title: 'Design Grafis', icon: designIcon, path: '/design' },
-    { title: 'Website & Undangan', icon: websiteIcon, path: '/website' },
-    { title: 'Animasi', icon: animationIcon, path: '/animation' },
-    { title: 'Feeds and Stories', icon: feedsIcon, path: '/feeds' }
+    {
+      icon: designIcon,
+      label: "DESIGN GRAFIS",
+      description: "Creative Solutions",
+      path: "/design",
+    },
+    {
+      icon: websiteIcon,
+      label: "TEMPLATE",
+      description: "TEMPLATE",
+      path: "/template",
+    },
+    {
+      icon: animationIcon,
+      label: "ANIMASI",
+      description: "Motion Graphics",
+      path: "/animation",
+    },
+    {
+      icon: feedsIcon,
+      label: "FEEDS AND STORIES",
+      description: "Content Creation",
+      path: "/feeds",
+    },
   ];
 
   const rules = [
@@ -34,30 +54,7 @@ const Portal = () => {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Main Logo Section */}
         <div className="flex flex-col items-center mb-12">
-          <div className="bg-white rounded-full p-4 w-32 h-32 flex items-center justify-center mb-6 shadow-lg">
-            <div className="relative w-full h-full">
-              <img
-                src={companyImg}
-                alt="InStayCreative Logo"
-                className="rounded-full object-cover"
-              />
-            </div>
-          </div>
           <h1 className="text-2xl font-bold text-white mb-2">InStayCreative</h1>
-        </div>
-
-        {/* Services Grid - 2x2 Layout */}
-        <div className="grid grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto">
-          {services.map((service, index) => (
-            <Link to={service.path} key={index}>
-              <div className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group">
-                <div className="w-16 h-16 mx-auto mb-4">
-                  <img src={service.icon} alt={service.title} className="w-full h-full" />
-                </div>
-                <h3 className="text-black font-medium text-sm sm:text-base">{service.title}</h3>
-              </div>
-            </Link>
-          ))}
         </div>
 
         {/* Join Us Section */}
@@ -95,6 +92,50 @@ const Portal = () => {
           </div>
         </div>
       </div>
+
+{/* Responsive Services Grid */}
+<div className="max-w-6xl mx-auto mb-12">
+  {/* Mobile View (2x2 grid) */}
+  <div className="block sm:hidden">
+    <div className="grid grid-cols-2 gap-4">
+      {services.map((service, index) => (
+        <Link
+          to={service.path}
+          key={index}
+          className="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+        >
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
+              <img
+                src={service.icon}
+                className="w-6 h-6"
+              />
+            </div>
+            <span className="text-sm font-semibold text-gray-800 text-center">
+              {service.label.split(" ")[0]}
+            </span>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </div>
+
+  {/* Desktop View (1x4 grid) */}
+  <div className="hidden sm:grid sm:grid-cols-4 gap-6">
+    {services.map((service, index) => (
+      <Link
+        to={service.path}
+        key={index}
+        className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+      >
+        <div className="w-16 h-16 mx-auto mb-4">
+          <img src={service.icon} alt={service.label} className="w-full h-full" />
+        </div>
+        <h3 className="text-black font-medium text-sm sm:text-base">{service.label}</h3>
+      </Link>
+    ))}
+  </div>
+</div>
 
       {/* Footer */}
       <div className="text-center text-slate-600 text-sm py-4">

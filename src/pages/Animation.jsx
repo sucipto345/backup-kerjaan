@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Masonry from 'react-masonry-css';
-import Sonic from '../assets/animasi/sonic-chicken[motion_logo].gif'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Masonry from "react-masonry-css";
+import Sonic from "../assets/animasi/sonic-chicken[motion_logo].gif";
 
 // Contoh data animasi
 const animate = [
   {
-    type: 'gif',
+    type: "gif",
     src: Sonic, // Sesuaikan path GIF Anda
-    hashtag: '#VideoProject',
-    category: 'Motion Logo',
-    worker: 'Worker V',
-    client: 'Client M'
+    hashtag: "#VideoProject",
+    category: "Motion Logo",
+    worker: "Worker V",
+    client: "Client M",
   },
   // Tambahkan GIF lain di sini dengan format yang sama
 ];
@@ -33,9 +33,12 @@ const Animation = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white pb-24">
-      <div className="relative p-4">
-        <Link to="/" className="text-lg hover:text-gray-300 transition-colors">
+      <div className="flex justify-between w-full py-4">
+        <Link to="/" className="text-lg cursor-pointer pl-12">
           ← Back to Home
+        </Link>
+        <Link to="/portal" className="text-lg cursor-pointer pr-12">
+          Back to Portal →
         </Link>
       </div>
 
@@ -70,7 +73,7 @@ const Animation = () => {
         <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50">
           {isZoomed ? (
             <div className="relative w-full h-full flex justify-center items-center">
-              <button 
+              <button
                 className="absolute top-4 right-4 text-white text-xl hover:text-gray-300"
                 onClick={closeModal}
               >
@@ -103,16 +106,24 @@ const Animation = () => {
 
                 {/* Details Section */}
                 <div className="p-6">
-                  <h2 className="text-2xl font-semibold mb-6">{selectedItem.hashtag}</h2>
+                  <h2 className="text-2xl font-semibold mb-6">
+                    {selectedItem.hashtag}
+                  </h2>
                   <div className="space-y-4">
-                    <p><strong>Category:</strong> {selectedItem.category}</p>
-                    <p><strong>Worker:</strong> {selectedItem.worker}</p>
-                    <p><strong>Client:</strong> {selectedItem.client}</p>
+                    <p>
+                      <strong>Category:</strong> {selectedItem.category}
+                    </p>
+                    <p>
+                      <strong>Worker:</strong> {selectedItem.worker}
+                    </p>
+                    <p>
+                      <strong>Client:</strong> {selectedItem.client}
+                    </p>
                   </div>
                 </div>
               </div>
-              
-              <button 
+
+              <button
                 className="absolute top-4 right-4 text-white text-xl hover:text-gray-300"
                 onClick={closeModal}
               >

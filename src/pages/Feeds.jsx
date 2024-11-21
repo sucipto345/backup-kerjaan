@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Masonry from 'react-masonry-css';
-import SosMed1 from '../assets/project/Social-Media/(social-media)Ninomae_Inanis[Youtube].jpg';
-import SosMed2 from '../assets/project/Social-Media/(social-media)Amman-Aria-Ramadhan[Youtube].jpg';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Masonry from "react-masonry-css";
+import SosMed1 from "../assets/project/Social-Media/(social-media)Ninomae_Inanis[Youtube].jpg";
+import SosMed2 from "../assets/project/Social-Media/(social-media)Amman-Aria-Ramadhan[Youtube].jpg";
 // import Design3 from '../assets/project/Design/Barber_Shop[spanduk].jpg';
 // import Design4 from '../assets/project/Design/Barber_Shop1[spanduk].jpg';
 // import Design5 from '../assets/project/Design/emote1[art].jpg';
@@ -15,8 +15,20 @@ import SosMed2 from '../assets/project/Social-Media/(social-media)Amman-Aria-Ram
 // import Design12 from '../assets/project/Design/RizzChoco[kemasan].jpg';
 
 const images = [
-  { src: SosMed1, hashtag: '#Banner-Youtube', category: 'Feeds & Reels', worker: 'Worker A', client: 'Client X' },
-  { src: SosMed2, hashtag: '#Banner-Youtube', category: 'Feeds & Reels', worker: 'Worker B', client: 'Client Y' },
+  {
+    src: SosMed1,
+    hashtag: "#Banner-Youtube",
+    category: "Feeds & Reels",
+    worker: "Worker A",
+    client: "Client X",
+  },
+  {
+    src: SosMed2,
+    hashtag: "#Banner-Youtube",
+    category: "Feeds & Reels",
+    worker: "Worker B",
+    client: "Client Y",
+  },
   // { src: Design3, hashtag: '#Barber', category: 'Design', worker: 'Worker C', client: 'Client Z' },
   // { src: Design4, hashtag: '#Barber', category: 'Design', worker: 'Worker C', client: 'Client Z' },
   // { src: Design5, hashtag: '#Art', category: 'Design', worker: 'Worker D', client: 'Client W' },
@@ -50,12 +62,12 @@ const Feeds = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white pb-24">
-      <div className="relative">
-        <Link
-          to="/"
-          className="relative top-4 left-4 text-lg cursor-pointer"
-        >
+      <div className="flex justify-between w-full py-4">
+        <Link to="/" className="text-lg cursor-pointer pl-12">
           ← Back to Home
+        </Link>
+        <Link to="/portal" className="text-lg cursor-pointer pr-12">
+          Back to Portal →
         </Link>
       </div>
 
@@ -70,7 +82,11 @@ const Feeds = () => {
           columnClassName="masonry-column"
         >
           {images.map((image, index) => (
-            <div key={index} className="mb-4 cursor-pointer" onClick={() => openModal(image)}>
+            <div
+              key={index}
+              className="mb-4 cursor-pointer"
+              onClick={() => openModal(image)}
+            >
               <img
                 src={image.src}
                 alt={`Gallery Image ${index + 1}`}
@@ -86,41 +102,65 @@ const Feeds = () => {
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 backdrop-blur-sm">
           {isZoomed ? (
             <div className="relative flex justify-center items-center">
-              <button className="absolute top-4 right-4 text-white text-xl" onClick={closeModal}>✕</button>
-              <img 
-                src={selectedImage.src} 
-                alt="Fullscreen" 
-                className={`rounded-lg object-contain ${selectedImage.src.includes('portrait') ? 'max-h-[75vh]' : 'w-3/4 h-3/4'} `}
+              <button
+                className="absolute top-4 right-4 text-white text-xl"
+                onClick={closeModal}
+              >
+                ✕
+              </button>
+              <img
+                src={selectedImage.src}
+                alt="Fullscreen"
+                className={`rounded-lg object-contain ${
+                  selectedImage.src.includes("portrait")
+                    ? "max-h-[75vh]"
+                    : "w-3/4 h-3/4"
+                } `}
               />
             </div>
           ) : (
             <div className="bg-gray-800 p-4 rounded-lg max-w-3xl w-full grid grid-cols-2 gap-4 mx-4 relative">
               {/* Close button */}
-              <button className="absolute top-4 right-4 text-white text-xl" onClick={closeModal}>✕</button>
-              
+              <button
+                className="absolute top-4 right-4 text-white text-xl"
+                onClick={closeModal}
+              >
+                ✕
+              </button>
+
               {/* Image on the left */}
               <div className="relative flex justify-center items-center">
-                <img 
-                  src={selectedImage.src} 
-                  alt="Fullscreen" 
+                <img
+                  src={selectedImage.src}
+                  alt="Fullscreen"
                   className="w-full h-full object-cover rounded-lg max-h-[70vh]"
                 />
                 {/* Zoom Button */}
-                <button 
-                  onClick={toggleZoom} 
+                <button
+                  onClick={toggleZoom}
                   className="absolute bottom-4 right-4 bg-white bg-opacity-75 text-gray-800 p-2 rounded-full shadow-lg"
                 >
                   Zoom
                 </button>
               </div>
-              
+
               {/* Details on the right */}
               <div className="text-gray-300 p-4 space-y-4">
-                <h2 className="text-xl font-semibold text-white">Image Details</h2>
-                <p><strong>Hashtag:</strong> {selectedImage.hashtag}</p>
-                <p><strong>Category:</strong> {selectedImage.category}</p>
-                <p><strong>Worker:</strong> {selectedImage.worker}</p>
-                <p><strong>Client:</strong> {selectedImage.client}</p>
+                <h2 className="text-xl font-semibold text-white">
+                  Image Details
+                </h2>
+                <p>
+                  <strong>Hashtag:</strong> {selectedImage.hashtag}
+                </p>
+                <p>
+                  <strong>Category:</strong> {selectedImage.category}
+                </p>
+                <p>
+                  <strong>Worker:</strong> {selectedImage.worker}
+                </p>
+                <p>
+                  <strong>Client:</strong> {selectedImage.client}
+                </p>
               </div>
             </div>
           )}

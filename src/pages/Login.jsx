@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { login } from '../services/auth'; // Import fungsi login
+import { login } from '../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        name_parent: '',
         email: '',
         password: '',
     });
 
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -17,17 +17,47 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validasi input
+        if (!formData.email) {
+            setError('Email harus diisi');
+            return;
+        }
+    
+        if (!formData.password) {
+            setError('Password harus diisi');
+            return;
+        }
+    
         try {
-            const response = await login(
-                formData.name,
-                formData.name_parent,
-                formData.email,
-                formData.password
-            );
-            console.log('Login berhasil', response);
-            // Lakukan navigasi ke halaman berikutnya atau tampilkan pesan sukses
+            // Tambahkan validasi email sederhana
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                setError('Format email tidak valid');
+                return;
+            }
+    
+            // Log data yang akan dikirim
+            console.log('Mencoba login dengan:', {
+                email: formData.email,
+                passwordLength: formData.password.length
+            });
+    
+            const response = await login(formData.email, formData.password);
+            
+            // Log response dari login
+            console.log('Login berhasil:', response);
+            
+            navigate('/dashboard');
+    
         } catch (err) {
-            setError(err.message || 'Gagal login');
+            // Log error secara mendetail
+            console.error('Login error detail:', {
+                message: err.message,
+                stack: err.stack
+            });
+            
+            setError(err.message || 'Login gagal');
         }
     };
 
@@ -38,15 +68,15 @@ const Login = () => {
                     <h1 className="text-black text-3xl font-bold mb-4 ml-12">Selamat Datang</h1>
                     {error && <p className="text-red-500 mb-4">{error}</p>}
                     <div className="mb-4">
-                        <label className="block text-white text-sm font-bold mb-2" htmlFor="name">
-                            Username
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="email">
+                            Email
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="name"
-                            type="text"
-                            placeholder="Masukkan Nama"
-                            value={formData.name}
+                            id="email"
+                            type="email"
+                            placeholder="Masukkan Email"
+                            value={formData.email}
                             onChange={handleChange}
                         />
                     </div>
@@ -72,9 +102,6 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
-                <p className="mt-4 text-white">
-                    Belum punya akun? <a href="/daftar" className="underline">Daftar di sini</a>
-                </p>
             </div>
         </div>
     );

@@ -1,17 +1,17 @@
 // src/components/Layout.jsx
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+// import Footer from './Footer';
 
-const Layout = ({ scrollToSection }) => {
+const Layout = () => {
   return (
-    <div className="min-h-screen bg-slate-700">
-      <Navbar scrollToSection={scrollToSection} />
+    <div className="flex flex-col bg-slate-700">
+      <Navbar />
       <main>
-        <Outlet /> {/* Tempat komponen halaman dirender */}
+        <Outlet />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

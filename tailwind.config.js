@@ -9,7 +9,7 @@ export default {
       screens: {
         'tablet' : '640px',
         'laptop' : '1024px',
-        'deskop' : '1280px'
+        'desktop' : '1280px'
       }
     },
   },
