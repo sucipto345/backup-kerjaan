@@ -8,7 +8,7 @@ import Animation from "./pages/Animation";
 import Login from "./pages/Login";
 import Daftar from "./pages/Daftar";
 import Portal from "./pages/Portal";
-import Contact from "./pages/contact";
+// import Contact from "./pages/contact";
 import Template from "./pages/Template";
 import Pernikahan1 from "./pages/Pernikahan";
 
