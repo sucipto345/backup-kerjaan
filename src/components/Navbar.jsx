@@ -42,12 +42,14 @@ const Navbar = ({ scrollToSection }) => {
               <img
                 src={logoCompany}
                 alt="Company Logo"
-                className="h-12 w-auto"
+                className="h-10 w-auto pl-2 pt-2 sm:h-12"
               />
             </Link>
             <div className="flex-col flex">
-              <p className="text-xl font-bold text-white">InStay</p>
-              <p className="text-xl font-bold text-white">Creative</p>
+              <p className="text-sm font-bold text-white sm:text-xl">InStay</p>
+              <p className="text-sm font-bold text-white sm:text-xl">
+                Creative
+              </p>
             </div>
           </div>
 
@@ -113,6 +115,20 @@ const Navbar = ({ scrollToSection }) => {
               className="text-white px-4 py-2 hover:bg-slate-700 rounded transition-colors"
             >
               E-BOOK
+            </Link>
+            <Link
+              to="/portal"
+              className="text-white px-4 py-2 hover:bg-slate-700 rounded transition-colors"
+            >
+              ORDER
+            </Link>
+          </div>
+          <div className="relative pr-5 text-sm">
+            <Link
+              to="/portal"
+              className="text-white px-4 py-2 bg-purple-700 rounded transition-colors"
+            >
+              ORDER
             </Link>
           </div>
 
