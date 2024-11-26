@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Design from "./pages/Design";
@@ -10,6 +11,7 @@ import Animation from "./pages/Animation";
 import Portal from "./pages/Portal";
 import Template from "./pages/Template";
 import Pernikahan1 from "./pages/Pernikahan";
+import NotFound from "./pages/NotFound";
 
 const scrollToSection = (id) => {
   const element = document.getElementById(id);
@@ -67,11 +69,15 @@ function App() {
           <Route path="/animation" element={<Animation />} />
           {/* <Route path="/login" element={<Login />} />
           <Route path="/daftar" element={<Daftar />} /> */}
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Route>
 
         {/* Rute tanpa Layout */}
         <Route path="/portal" element={<Portal />} />
         <Route path="/pernikahan" element={<Pernikahan1 />}></Route>
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </Router>
   );
