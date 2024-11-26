@@ -3,27 +3,22 @@ import { Link } from "react-router-dom";
 import Masonry from "react-masonry-css";
 import Sonic from "../assets/animasi/sonic-chicken[motion_logo].gif";
 
-// Contoh data animasi
 const animate = [
   {
     type: "gif",
-    src: Sonic, // Sesuaikan path GIF Anda
+    src: Sonic,
     hashtag: "#VideoProject",
     category: "Motion Logo",
     worker: "Worker V",
     client: "Client M",
   },
-  // Tambahkan GIF lain di sini dengan format yang sama
 ];
 
 const Animation = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isZoomed, setIsZoomed] = useState(false);
 
-  const openModal = (item) => {
-    setSelectedItem(item);
-  };
-
+  const openModal = (item) => setSelectedItem(item);
   const closeModal = () => {
     setSelectedItem(null);
     setIsZoomed(false);
@@ -68,7 +63,6 @@ const Animation = () => {
         </Masonry>
       </main>
 
-      {/* Modal */}
       {selectedItem && (
         <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50">
           {isZoomed ? (
@@ -87,48 +81,45 @@ const Animation = () => {
             </div>
           ) : (
             <div className="bg-gray-800 rounded-lg max-w-5xl w-full mx-4 relative">
-              <div className="grid grid-cols-2 gap-4">
-                {/* Image Section */}
-                <div className="relative p-4">
-                  <img
-                    src={selectedItem.src}
-                    alt={selectedItem.hashtag}
-                    className="w-full h-auto rounded-lg"
-                  />
-                  <button
-                    onClick={toggleZoom}
-                    className="absolute bottom-8 right-8 bg-white text-gray-800 px-4 py-2 rounded-lg 
-                             hover:bg-gray-100 transition-colors"
-                  >
-                    Zoom
-                  </button>
-                </div>
-
-                {/* Details Section */}
-                <div className="p-6">
-                  <h2 className="text-2xl font-semibold mb-6">
-                    {selectedItem.hashtag}
-                  </h2>
-                  <div className="space-y-4">
-                    <p>
-                      <strong>Category:</strong> {selectedItem.category}
-                    </p>
-                    <p>
-                      <strong>Worker:</strong> {selectedItem.worker}
-                    </p>
-                    <p>
-                      <strong>Client:</strong> {selectedItem.client}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               <button
-                className="absolute top-4 right-4 text-white text-xl hover:text-gray-300"
+                className="absolute top-4 right-4 text-white text-xl hover:text-gray-300 z-10"
                 onClick={closeModal}
               >
                 ✕
               </button>
+
+              {/* Gambar di atas */}
+              <div className="relative p-4">
+                <img
+                  src={selectedItem.src}
+                  alt={selectedItem.hashtag}
+                  className="w-full h-auto rounded-lg"
+                />
+                <button
+                  onClick={toggleZoom}
+                  className="absolute bottom-8 right-8 bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  Zoom
+                </button>
+              </div>
+
+              {/* Informasi di bawah */}
+              <div className="p-6">
+                <h2 className="text-2xl font-semibold mb-6">
+                  {selectedItem.hashtag}
+                </h2>
+                <div className="space-y-4">
+                  <p>
+                    <strong>Category:</strong> {selectedItem.category}
+                  </p>
+                  <p>
+                    <strong>Worker:</strong> {selectedItem.worker}
+                  </p>
+                  <p>
+                    <strong>Client:</strong> {selectedItem.client}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </div>

@@ -273,8 +273,12 @@ const Home = () => {
       {/* Fixed Button */}
       <div className="fixed bottom-10 right-14 z-50">
         <Link to="/contact">
-          <button className="w-14 h-14 flex items-center justify-center bg-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 focus:outline-none">
-            <img src={ContactUs} alt="Contact Us" width={38} />
+          <button className="flex items-center justify-center bg-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 focus:outline-none">
+            <img
+              src={ContactUs}
+              alt="Contact Us"
+              className=" object-cover w-12"
+            />
           </button>
         </Link>
       </div>

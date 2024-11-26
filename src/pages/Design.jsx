@@ -160,7 +160,7 @@ const Design = () => {
           {isZoomed ? (
             <div className="relative flex justify-center items-center">
               <button
-                className="absolute top-4 right-4 text-white text-xl"
+                className="absolute top-0 right-0 text-white text-xl z-10 "
                 onClick={closeModal}
               >
                 ✕
@@ -176,9 +176,9 @@ const Design = () => {
               />
             </div>
           ) : (
-            <div className="bg-gray-800 p-4 rounded-lg max-w-3xl w-full grid grid-cols-2 gap-4 mx-4 relative">
+            <div className="bg-gray-800 p-4 rounded-lg max-w-3xl w-full mx-4 relative">
               <button
-                className="absolute top-4 right-4 text-white text-xl"
+                className="absolute top-0 right-0 text-white text-xl z-10"
                 onClick={closeModal}
               >
                 ✕
@@ -197,7 +197,6 @@ const Design = () => {
                   Zoom
                 </button>
               </div>
-
               <div className="text-gray-300 p-4 space-y-4">
                 <h2 className="text-xl font-semibold text-white">
                   Image Details
