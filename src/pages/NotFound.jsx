@@ -15,7 +15,7 @@ const NotFound = () => {
             Kembali ke Beranda
           </Link>
           <Link
-            to="/"
+            to="/portal"
             className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition"
           >
             Portal
