@@ -48,7 +48,7 @@ const Login = () => {
             // Log response dari login
             console.log('Login berhasil:', response);
             
-            navigate('/dashboard');
+            navigate('/');
     
         } catch (err) {
             // Log error secara mendetail
