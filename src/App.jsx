@@ -5,8 +5,8 @@ import Home from "./pages/Home";
 import Design from "./pages/Design";
 import Feeds from "./pages/Feeds";
 import Animation from "./pages/Animation";
-import Login from "./pages/Login";
-import Daftar from "./pages/Daftar";
+// import Login from "./pages/Login";
+// import Daftar from "./pages/Daftar";
 import Portal from "./pages/Portal";
 import Template from "./pages/Template";
 import Pernikahan1 from "./pages/Pernikahan";
@@ -19,43 +19,42 @@ const scrollToSection = (id) => {
 };
 
 function App() {
-  //   useEffect(() => {
-  //     // Menonaktifkan klik kanan
-  //     const handleContextMenu = (e) => {
-  //       e.preventDefault();
-  //     };
+  useEffect(() => {
+    // Menonaktifkan klik kanan
+    const handleContextMenu = (e) => {
+      e.preventDefault();
+    };
 
-  //     // Menonaktifkan pintasan keyboard tertentu
-  //     const handleKeyDown = (e) => {
-  //       if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
-  //         e.preventDefault();
-  //       }
-  //       if (e.ctrlKey && e.key === "u") {
-  //         e.preventDefault();
-  //       }
-  //       if (e.ctrlKey && e.shiftKey && e.key === "J") {
-  //         e.preventDefault();
-  //       }
-  //     };
+    // Menonaktifkan pintasan keyboard tertentu
+    const handleKeyDown = (e) => {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.key === "u") {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && e.key === "J") {
+        e.preventDefault();
+      }
+    };
 
-  //     // Menonaktifkan drag and drop
-  //     const handleDragStart = (e) => {
-  //       e.preventDefault();
-  //     };
+    // Menonaktifkan drag and drop
+    const handleDragStart = (e) => {
+      e.preventDefault();
+    };
 
-  //     // Menambahkan event listener
-  //     document.addEventListener("contextmenu", handleContextMenu);
-  //     document.addEventListener("keydown", handleKeyDown);
-  //     document.addEventListener("dragstart", handleDragStart);
+    // Menambahkan event listener
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("dragstart", handleDragStart);
 
-  //     // Membersihkan event listener saat komponen di-unmount
-  //     return () => {
-  //       document.removeEventListener("contextmenu", handleContextMenu);
-  //       document.removeEventListener("keydown", handleKeyDown);
-  //       document.removeEventListener("dragstart", handleDragStart);
-  //     };
-  //   }, []
-  // );
+    // Membersihkan event listener saat komponen di-unmount
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("dragstart", handleDragStart);
+    };
+  }, []);
   return (
     <Router>
       <Routes>
@@ -66,8 +65,8 @@ function App() {
           <Route path="/template" element={<Template />} />
           <Route path="/feeds" element={<Feeds />} />
           <Route path="/animation" element={<Animation />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/daftar" element={<Daftar />} />
+          {/* <Route path="/login" element={<Login />} />
+          <Route path="/daftar" element={<Daftar />} /> */}
         </Route>
 
         {/* Rute tanpa Layout */}
